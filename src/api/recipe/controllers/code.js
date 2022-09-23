@@ -46,4 +46,24 @@ module.exports = {
       ctx.body = { message: err.message };
     }
   },
+  pay: async (ctx, next) => {
+    const id = ctx.params?.id;
+
+    try {
+      await strapi.db.query("api::recipe.recipe").update({
+        where: { id },
+        data: {
+          paid: true,
+        },
+      });
+
+      const recipes = await strapi.db.query("api::recipe.recipe").findMany();
+
+      ctx.status = 201;
+      ctx.body = recipes;
+    } catch (error) {
+      ctx.status = 400;
+      ctx.body = { message: err.message };
+    }
+  },
 };

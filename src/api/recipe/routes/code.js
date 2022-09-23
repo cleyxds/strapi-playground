@@ -3,10 +3,14 @@
 module.exports = {
   routes: [
     {
-      // Path defined with an URL parameter
       method: "POST",
       path: "/recipes/:id/code",
       handler: "code.generatecode",
+    },
+    {
+      method: "POST",
+      path: "/recipes/:id/pay",
+      handler: "code.pay",
     },
   ],
 };
